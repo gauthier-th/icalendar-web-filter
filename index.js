@@ -35,6 +35,8 @@ app.get('/filter', async (req, res) => {
 		if (!regexp.test(calendar[uid].summary))
 			result[uid] = calendar[uid];
 	}
+	res.set('content-disposition', 'inline; filename=ADECal.ics');
+	res.set('content-type', 'text/calendar;charset=UTF-8');
 	res.end(serialize(result));
 });
 
