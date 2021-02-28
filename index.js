@@ -32,7 +32,7 @@ app.get('/filter', async (req, res) => {
 	const result = {};
 	const regexp = new RegExp(req.query.regexp, req.query.case_insensitive);
 	for (let uid of Object.keys(calendar)) {
-		if (regexp.test(calendar[uid].summary))
+		if (!regexp.test(calendar[uid].summary))
 			result[uid] = calendar[uid];
 	}
 	res.end(serialize(result));
