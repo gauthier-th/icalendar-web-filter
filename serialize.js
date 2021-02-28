@@ -12,17 +12,17 @@ function serialize(parsed) {
 	result.push('CALSCALE:GREGORIAN');
 
 	for (let uid of Object.keys(parsed)) {
-		const event = parsed[uid]
+		const event = parsed[uid];
 		result.push('BEGIN:VEVENT');
-		result.push('DTSTAMP:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('DTSTART:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		result.push('DTSTAMP:' + event.dtstamp.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		result.push('DTSTART:' + event.start.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
 		result.push('DTEND:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
 		result.push('SUMMARY:' + event.summary.replace(/\n/g, '\\n').replace(', ', '\\,'));
 		result.push('LOCATION:' + event.location.replace(/\n/g, '\\n').replace(', ', '\\,'));
 		result.push('DESCRIPTION:' + event.description.replace(/\n/g, '\\n').replace(', ', '\\,'));
 		result.push('UID:' + uid.replace(', ', '\\,'));
-		result.push('CREATED:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('LAST-MODIFIED:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		result.push('CREATED:' + event.created.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		result.push('LAST-MODIFIED:' + event.lastmodified.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
 		result.push('SEQUENCE:' + event.sequence);
 		result.push('END:VEVENT');
 	}
