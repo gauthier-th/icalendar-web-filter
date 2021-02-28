@@ -1,0 +1,42 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #272727;
+	color: #eee;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";;
+}
+
+#container {
+	padding: 32px;
+	width: 500px;
+	max-width: 100vw;
+}
+
+input:not(input[type="button"]), textarea {
+	background-color: #272727;
+	color: #eee;
+	outline: none;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	padding: 3px 5px;
+	margin: 4px 0;
+	width: 100%;
+}
+button, input[type="button"] {
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	background-color: #eee;
+	color: #272727;
+	padding: 6px 12px;
+	margin: 4px 0;
+	cursor: pointer;
+}
+textarea {
+	min-height: 100px;
+	resize: vertical;
+}
