@@ -1,7 +1,7 @@
 {
-  "name": "icalendar-web-parser",
+  "name": "icalendar-web-filter",
   "version": "1.0.0",
-  "description": "",
+  "description": "An url parser and filter for iCalendar",
   "main": "index.js",
   "scripts": {
     "start": "node index",
