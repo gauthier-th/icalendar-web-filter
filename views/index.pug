@@ -5,11 +5,19 @@ html(class="dark")
 		script(src="/index.js")
 		link(rel="stylesheet" href="/index.css")
 	body
+		style.
+			#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#c11;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}
+		span#forkongithub
+			a(href='https://github.com/codepo8/css-fork-on-github-ribbon') Fork me on GitHub
 		#container
 			h1 iCalendar filter
 			form
+				span URL of the original iCalendar:
+				br
 				textarea#url(type="text" placeholder="Calendar URL")
 				br
+				br
+				span Filter by RegExp #[a(href="https://regex101.com/" target="_blank") (see here)]:
 				br
 				input#regexp-summary(type="text" placeholder="Summary RegExp")
 				br
@@ -18,9 +26,17 @@ html(class="dark")
 				input#regexp-description(type="text" placeholder="Description RegExp")
 				br
 				input#generate(type="button" value="Generate")
+				br
+				br
+				span Filter between dates:
+				br
+				div(style="display: flex; justify-content: space-between; align-items: center;")
+					input#start-date(type="date")
+					span(style="margin: 0 10px;") between
+					input#end-date(type="date")
 			br
 			br
-			span Result:
+			span Result iCalendar:
 			br
 			textarea#result(type="text" readonly)
 			span#note

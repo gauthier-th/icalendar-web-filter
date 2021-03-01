@@ -3,6 +3,8 @@ function generateURL() {
 	var regexpSummary = document.getElementById("regexp-summary").value;
 	var regexpLocation = document.getElementById("regexp-location").value;
 	var regexpDescription = document.getElementById("regexp-description").value;
+	var startDate = document.getElementById("start-date").value;
+	var endDate = document.getElementById("end-date").value;
 
 	var result = "calendar_url=" + encodeURIComponent(url);
 	if (regexpSummary)
@@ -11,6 +13,11 @@ function generateURL() {
 		result += "&regexp_location=" + encodeURIComponent(regexpLocation);
 	if (regexpDescription)
 		result += "&regexp_description=" + encodeURIComponent(regexpDescription);
+	
+	if (startDate)
+		result += "&start_date=" + encodeURIComponent(startDate)
+	if (endDate)
+		result += "&end_date=" + encodeURIComponent(endDate)
 
 	countEvents(result);
 	result = window.location.protocol + "//" + window.location.host + "/filter?" + result;

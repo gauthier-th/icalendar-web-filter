@@ -40,3 +40,12 @@ textarea {
 	min-height: 100px;
 	resize: vertical;
 }
+
+a, a:hover, a:active {
+	color: #66a9ff;
+	text-decoration: none;
+}
+a:hover, a:active {
+	color: #297fee;
+	text-decoration: none;
+}
