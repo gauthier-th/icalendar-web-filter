@@ -4,7 +4,7 @@ function generateURL() {
 	var regexpLocation = document.getElementById("regexp-location").value;
 	var regexpDescription = document.getElementById("regexp-description").value;
 
-	var result = window.location.protocol + "//" + window.location.host + "/filter?calendar_url=" + encodeURIComponent(document.getElementById("url").value);
+	var result = "calendar_url=" + encodeURIComponent(url);
 	if (regexpSummary)
 		result += "&regexp_summary=" + encodeURIComponent(regexpSummary);
 	if (regexpLocation)
@@ -12,9 +12,18 @@ function generateURL() {
 	if (regexpDescription)
 		result += "&regexp_description=" + encodeURIComponent(regexpDescription);
 
+	countEvents(result);
+	result = window.location.protocol + "//" + window.location.host + "/filter?" + result;
 	document.getElementById("result").value = result;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('generate').addEventListener('click', generateURL);
 });
+
+function countEvents(url) {
+	fetch(window.location.protocol + "//" + window.location.host + "/filter-infos?" + url).then(function(response) { return response.json() }).then(function(infos) {
+		document.getElementById("note").innerText = "Events count in the new calendar : " + infos.newCount;
+		document.getElementById("note").innerText += "\nEvents count in the old calendar : " + infos.oldCount;
+	});
+}
