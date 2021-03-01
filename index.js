@@ -26,18 +26,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/filter', async (req, res) => {
-	if (!req.query.calendar_url || !req.query.regexp)
+	if (!req.query.calendar_url)
 		return res.status(400).json({ error: 'Invalid body' });
-	const calendar = await ical.async.fromURL(req.query.calendar_url);
-	const result = {};
-	const regexp = new RegExp(req.query.regexp, req.query.case_insensitive);
-	for (let uid of Object.keys(calendar)) {
-		if (!regexp.test(calendar[uid].summary))
-			result[uid] = calendar[uid];
+	try {
+		const calendar = await ical.async.fromURL(req.query.calendar_url);
+		const result = {};
+		const regexp_summary = req.query.regexp_summary ? new RegExp(req.query.regexp_summary, req.query.summary_case_insensitive === "0" ? "i" : "i") : null;
+		const regexp_location = req.query.regexp_location ? new RegExp(req.query.regexp_location, req.query.location_case_insensitive === "0" ? "i" : "i") : null;
+		const regexp_description = req.query.regexp_description ? new RegExp(req.query.regexp_description, req.query.description_case_insensitive === "0" ? "i" : "i") : null;
+		for (let uid of Object.keys(calendar)) {
+			if ((!regexp_summary || !regexp_summary.test(calendar[uid].summary)) && (!regexp_location || !regexp_location.test(calendar[uid].location)) && (!regexp_description || !regexp_description.test(calendar[uid].description)))
+				result[uid] = calendar[uid];
+		}
+		res.set('content-disposition', 'inline; filename=ADECal.ics');
+		res.set('content-type', 'text/calendar;charset=UTF-8');
+		res.end(serialize(result));
 	}
-	res.set('content-disposition', 'inline; filename=ADECal.ics');
-	res.set('content-type', 'text/calendar;charset=UTF-8');
-	res.end(serialize(result));
+	catch (e) {
+		console.error(e);
+		res.end('Unexpected error');
+	}
 });
 
 
