@@ -6,9 +6,9 @@ html(class="dark")
 		link(rel="stylesheet" href="/index.css")
 	body
 		style.
-			#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#c11;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}
+			#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#c11;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}} @media(max-width: 850px){#forkongithub{display:none;}}
 		span#forkongithub
-			a(href='https://github.com/codepo8/css-fork-on-github-ribbon') Fork me on GitHub
+			a(href='https://github.com/gauthier-th/icalendar-web-filter' target='_blank') Fork me on GitHub
 		#container
 			h1 iCalendar filter
 			form
@@ -25,8 +25,6 @@ html(class="dark")
 				br
 				input#regexp-description(type="text" placeholder="Description RegExp")
 				br
-				input#generate(type="button" value="Generate")
-				br
 				br
 				span Filter between dates:
 				br
@@ -34,9 +32,32 @@ html(class="dark")
 					input#start-date(type="date")
 					span(style="margin: 0 10px;") between
 					input#end-date(type="date")
+				br
+				span Alarm setup:
+				br
+				div(style="display: flex; justify-content: space-between; align-items: center;")
+					span(style="margin-right: 10px;") Trigger alarm 
+					input#alarm-countdown(type="number" style="max-width: 60px;" min="1" max="999")
+					div(style="display: flex; flex-direction: column; justify-content: center;")
+						input(type="radio" id="alarm-unit-minute" name="alarm-unit" value="M")
+						label(for="alarm-unit-minute") minute
+					div(style="display: flex; flex-direction: column; justify-content: center;")
+						input(type="radio" id="alarm-unit-hour" name="alarm-unit" value="H")
+						label(for="alarm-unit-hour") hour
+					div(style="display: flex; flex-direction: column; justify-content: center;")
+						input(type="radio" id="alarm-unit-day" name="alarm-unit" value="D")
+						label(for="alarm-unit-day") day
+					div(style="display: flex; flex-direction: column; justify-content: center;")
+						input(type="radio" id="alarm-unit-week" name="alarm-unit" value="W")
+						label(for="alarm-unit-week") week
+					span(style="margin-left: 10px;") before event.
+				br
+				div(style="display: flex; justify-content: center;")
+					input#generate(type="button" value="Generate")
 			br
 			br
-			span Result iCalendar:
-			br
-			textarea#result(type="text" readonly)
-			span#note
+			div
+				span Result iCalendar:
+				br
+				textarea#result(type="text" readonly)
+				span#note

@@ -24,6 +24,12 @@ function serialize(parsed) {
 		result.push('CREATED:' + event.created.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
 		result.push('LAST-MODIFIED:' + event.lastmodified.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
 		result.push('SEQUENCE:' + event.sequence);
+		if (event.alarm) {
+			result.push('BEGIN:VALARM');
+			result.push('ACTION:DISPLAY');
+			result.push('TRIGGER;RELATED=' + event.alarm);
+			result.push('END:VALARM');
+		}
 		result.push('END:VEVENT');
 	}
 

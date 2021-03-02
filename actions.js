@@ -8,7 +8,10 @@ module.exports.filterCalendar = async (query) => {
 	const regexp_description = query.regexp_description ? new RegExp(query.regexp_description, query.description_case_insensitive === "0" ? "i" : "i") : null;
 	const start_date = query.start_date && query.start_date.match(/^\d{4}-(0\d|1[12])-([012]\d|3[01])$/) ? query.start_date : null;
 	const end_date = query.end_date && query.end_date.match(/^\d{4}-(0\d|1[12])-([012]\d|3[01])$/) ? query.end_date : null;
+	const alarm = query.alarm && query.alarm.match(/^\d{1,3}[mhdw]$/i) ? query.alarm.toUpperCase() : null;
 	for (let uid of Object.keys(calendar)) {
+		const event = calendar[uid];
+
 		if (regexp_summary && regexp_summary.test(calendar[uid].summary))
 			continue;
 		if (regexp_location && regexp_location.test(calendar[uid].location))
@@ -21,7 +24,14 @@ module.exports.filterCalendar = async (query) => {
 		if (end_date && dateGreaterThan(dateToString(calendar[uid].end), end_date, true))
 			continue;
 
-		result[uid] = calendar[uid];
+		if (alarm) {
+			if (alarm.match(/[MH]$/))
+				event.alarm = "START:-PT" + alarm;
+			else
+			event.alarm = "START:-P" + alarm;
+		}
+
+		result[uid] = event;
 	}
 	return {
 		calendar,
