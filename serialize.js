@@ -14,16 +14,16 @@ function serialize(parsed) {
 	for (let uid of Object.keys(parsed)) {
 		const event = parsed[uid];
 		result.push('BEGIN:VEVENT');
-		result.push('DTSTAMP:' + event.dtstamp.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('DTSTART:' + event.start.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('DTEND:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('SUMMARY:' + event.summary.replace(/\n/g, '\\n').replace(', ', '\\,'));
-		result.push('LOCATION:' + event.location.replace(/\n/g, '\\n').replace(', ', '\\,'));
-		result.push('DESCRIPTION:' + event.description.replace(/\n/g, '\\n').replace(', ', '\\,'));
-		result.push('UID:' + uid.replace(', ', '\\,'));
-		result.push('CREATED:' + event.created.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('LAST-MODIFIED:' + event.lastmodified.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
-		result.push('SEQUENCE:' + event.sequence);
+		if (event.dtstamp) result.push('DTSTAMP:' + event.dtstamp.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		if (event.start) result.push('DTSTART:' + event.start.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		if (event.end) result.push('DTEND:' + event.end.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		if (event.summary) result.push('SUMMARY:' + event.summary.replace(/\n/g, '\\n').replace(', ', '\\,'));
+		if (event.location) result.push('LOCATION:' + event.location.replace(/\n/g, '\\n').replace(', ', '\\,'));
+		if (event.description) result.push('DESCRIPTION:' + event.description.replace(/\n/g, '\\n').replace(', ', '\\,'));
+		if (uid) result.push('UID:' + uid.replace(', ', '\\,'));
+		if (event.created) result.push('CREATED:' + event.created.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		if (event.lastmodified) result.push('LAST-MODIFIED:' + event.lastmodified.toISOString().replace(/([-:]|.000(Z)$)/g, '$2'));
+		if (event.sequence) result.push('SEQUENCE:' + event.sequence);
 		if (event.alarm) {
 			result.push('BEGIN:VALARM');
 			result.push('ACTION:DISPLAY');
